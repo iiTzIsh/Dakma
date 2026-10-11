@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive Sinhala Text Reader | R26-DS-002</title>
+<meta name="description" content="Research project R26-DS-002, SLIIT: an interactive Sinhala text reader for visually impaired people using OCR, NLP and AI.">
+<link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  /* apply saved theme before first paint */
+  (function () {
+    try {
+      var t = localStorage.getItem('rdr-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================== HEADER ============================== -->
+<header class="site-header" id="top">
+  <div class="wrap header-row">
+    <a class="brand" href="#home" aria-label="Sinhala Text Reader, back to top">
+      <img src="assets/img/mark.svg" alt="" width="34" height="34">
+      <span class="brand-text">
+        <span class="brand-name">Dakma</span>
+        <span class="brand-id">Sinhala Text Reader</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#domain">Domain</a></li>
+        <li><a href="#milestones">Milestones</a></li>
+        <li><a href="#documents">Documents</a></li>
+        <li><a href="#presentations">Presentations</a></li>
+        <li><a href="#about">About us</a></li>
+        <li><a href="#contact">Contact us</a></li>
+      </ul>
+    </nav>
+
+    <div class="tools">
+      <button class="tool" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button class="tool menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+</header>
+
+<main id="main">
+
+<!-- ============================== HOME ============================== -->
+<section id="home" class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-kicker">Final-year research project, Sri Lanka Institute of Information Technology</p>
+      <h1>Interactive Sinhala Text Reader for the Visually Impaired</h1>
+      <p class="hero-sub">Using OCR, NLP and AI</p>
+      <p class="lead" id="abstract-text">A smartphone reader that guides a blind user to photograph a printed Sinhala newspaper, corrects the mistakes that text recognition makes, reads the article aloud, and then answers spoken questions about it in the way each listener prefers.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#domain">Read about the research</a>
+        <button class="btn btn-quiet" id="listen-btn" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Listen to this summary</span>
+        </button>
+      </div>
+      <dl class="hero-facts">
+        <div><dt>Group</dt><dd>R26-DS-002</dd></div>
+        <div><dt>Specialisation</dt><dd>BSc (Hons) IT, Data Science</dd></div>
+        <div><dt>Year</dt><dd>2026</dd></div>
+      </dl>
+    </div>
+
+    <!-- Signature element: an OCR line being corrected, then spoken -->
+    <figure class="demo" aria-labelledby="demo-cap">
+      <div class="demo-clip">
+        <div class="demo-head">
+          <span class="demo-state" id="demo-state">Text as recognised by OCR</span>
+          <button class="demo-replay" id="demo-replay" type="button">Replay</button>
+        </div>
+        <p class="si demo-line" id="demo-line" lang="si" aria-live="off"></p>
+        <p class="si demo-line demo-line-2" id="demo-line-2" lang="si"></p>
+        <div class="demo-foot">
+          <div class="wave" id="wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="demo-count" id="demo-count">3 errors found</span>
+        </div>
+      </div>
+      <figcaption id="demo-cap">Three typical recognition errors in a Sinhala sentence: a dropped vowel sign, a confused letter pair (ව read as ච) and a lost nasal mark. The correction model repairs them before the line is spoken. On 217 locked test sentences, correction cut the word error rate from 33.6% to 16.4%.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <ol class="flow-strip" aria-label="How the reader works">
+      <li><strong>Capture</strong><span>Spoken guidance until the page is close and steady, then an automatic shutter</span></li>
+      <li><strong>Recognise</strong><span>Article isolated, headline and body read with custom Tesseract models</span></li>
+      <li><strong>Correct</strong><span>A fine-tuned mT5 model repairs body-text errors sentence by sentence</span></li>
+      <li><strong>Converse</strong><span>The user asks in Sinhala and hears a grounded answer in their preferred style</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================== DOMAIN ============================== -->
+<section id="domain" class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <h2>Domain</h2>
+      <p>What the literature says, what is missing, and how the four components address it.</p>
+    </header>
+
+    <div class="domain-grid">
+      <nav class="domain-index" aria-label="Domain sections">
+        <ol>
+          <li><a href="#literature">Literature survey</a></li>
+          <li><a href="#gap">Research gap</a></li>
+          <li><a href="#problem">Research problem</a></li>
+          <li><a href="#objectives">Research objectives</a></li>
+          <li><a href="#methodology">Methodology</a></li>
+          <li><a href="#technologies">Technologies used</a></li>
+        </ol>
+      </nav>
+
+      <div class="domain-body prose">
+
+        <article id="literature" class="sub">
+          <h3>Literature survey</h3>
+          <p>The World Health Organization estimates that at least 2.2 billion people live with a near or distance vision impairment. In Sri Lanka most people read Sinhala, yet the assistive readers in common use, such as JAWS and Google Lookout, are built around English, and Google's on-device text recognition does not support the Sinhala script at all.</p>
+          <p>Sinhala is hard for recognition engines. It is an abugida in which small vowel signs sit above, below, before or after a consonant, and touching conjuncts are common. Those small marks are the first to disappear when a photograph is slightly blurred or too far away. Published accuracy figures are mostly measured on clean synthetic text: one engine reached 0.76% character error on synthetic Sinhala but 8.84% on real legislative pages.</p>
+          <div class="lit-areas">
+            <div>
+              <h4>Sinhala OCR</h4>
+              <p>Recent work moved straight to end-to-end neural models. Topology-aware preprocessing for stylised headline fonts has not been evaluated.</p>
+            </div>
+            <div>
+              <h4>Post-OCR correction</h4>
+              <p>A mature field for European languages. Sinhala correction work is rule- and dictionary-based, and many OCR errors form another valid Sinhala word.</p>
+            </div>
+            <div>
+              <h4>Retrieval-augmented answers</h4>
+              <p>Rarely treats the amount of retrieved context as a personal setting, and rarely addresses Sinhala news or answers that are heard rather than read.</p>
+            </div>
+            <div>
+              <h4>Voice interaction</h4>
+              <p>Sinhala speech research stops at recognition. Intent detection depends on labelled data, and assistants give every user the same response.</p>
+            </div>
+            <div>
+              <h4>Capture without sight</h4>
+              <p>Studies of blind users found that 84% of failed document photos were taken too close, and that short spoken directions work better than detailed feedback.</p>
+            </div>
+          </div>
+        </article>
+
+        <article id="gap" class="sub">
+          <h3>Research gap</h3>
+          <p>Each strand of research covers part of the picture, but none joins the parts. There is no Sinhala-specific pipeline that carries a hand-held photograph of a printed page through accurate recognition and correction to grounded, spoken answers that adapt to the individual listener.</p>
+          <div class="table-scroll">
+            <table class="gap-table">
+              <caption class="sr-only">Research gap by component</caption>
+              <thead><tr><th scope="col">Component</th><th scope="col">What is missing in existing work</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Headline recognition</th><td>No evaluation of Medial Axis Transform skeletonisation ahead of an LSTM engine for stylised Sinhala typography</td></tr>
+                <tr><th scope="row">Body-text correction</th><td>No context-aware, transformer-based post-OCR corrector for Sinhala, and no benchmark of real photographed Sinhala to compare methods on</td></tr>
+                <tr><th scope="row">Answer generation</th><td>No style-aware retrieval for Sinhala news in which the user's preferred style controls both wording and retrieval depth</td></tr>
+                <tr><th scope="row">Voice and personalisation</th><td>No Sinhala assistive voice interface that learns each user's answer style online, without a labelled dataset</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article id="problem" class="sub">
+          <h3>Research problem</h3>
+          <blockquote class="statement">Sinhala-speaking visually impaired and low-vision people cannot independently obtain, on demand, the content of printed Sinhala newspapers in a form they can trust and follow by ear.</blockquote>
+          <ul class="evidence">
+            <li><strong>No available tool serves the need.</strong> Commercial readers do not offer Sinhala, and academic prototypes pass raw images straight to standard engines.</li>
+            <li><strong>Open-source recognition is not accurate enough to listen to.</strong> On newspaper pages photographed under realistic conditions, Tesseract made a character error rate of 0.1197 and a word error rate of 0.3358, so about one spoken word in three was wrong.</li>
+            <li><strong>Errors are hard to detect.</strong> A listener hears a wrong word in the same confident voice as a right one.</li>
+            <li><strong>Existing tools cannot be asked anything.</strong> They read whole articles in one fixed style and cannot summarise, explain or simplify.</li>
+          </ul>
+        </article>
+
+        <article id="objectives" class="sub">
+          <h3>Research objectives</h3>
+          <p class="aim"><strong>Main objective.</strong> Design, build and evaluate an integrated smartphone-based Sinhala reader that lets visually impaired and low-vision users capture a printed newspaper page without sight, have its headline and body text recognised and corrected, ask about it in spoken Sinhala, and hear grounded answers in the style each user prefers.</p>
+          <h4 class="list-title">Specific objectives</h4>
+          <ol class="objectives">
+            <li>Enable eyes-free capture of a newspaper page at the resolution recognition needs.</li>
+            <li>Isolate the article's headline and body without clipping Sinhala vowel signs.</li>
+            <li>Recognise stylised Sinhala headlines and evaluate topological preprocessing.</li>
+            <li>Reduce body-text recognition errors to a level a listener can follow.</li>
+            <li>Generate grounded Sinhala answers about the current article, in the requested style.</li>
+            <li>Accept spoken Sinhala requests and learn each user's answer style without an upfront dataset.</li>
+            <li>Integrate the four components so that the failure of one does not stop reading.</li>
+            <li>Validate the integrated system with intended users.</li>
+          </ol>
+        </article>
+
+        <article id="methodology" class="sub">
+          <h3>Methodology</h3>
+          <p>The system is one reading pipeline. Each numbered layer receives a shared article object, adds to it and passes it on, and the layer boundary is also the ownership boundary between the four members. The components run as separate services joined by HTTP and JSON contracts, so a component that is down switches off one feature instead of stopping the reader.</p>
+
+          <figure class="pipeline" id="pipeline">
+            <svg viewBox="0 0 880 300" role="img" aria-labelledby="pl-title pl-desc">
+              <title id="pl-title">System pipeline</title>
+              <desc id="pl-desc">The phone captures frames and sends them to the reader service. Component 1 segments the page and reads the headline, Component 2 reads and corrects the body, and the article is assembled. Spoken questions go to Component 4, which sends a styled request to Component 3; the answer returns to the phone and is spoken.</desc>
+              <defs>
+                <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="pl-arrowhead"/></marker>
+              </defs>
+              <!-- reading path -->
+              <path class="pl-line" d="M118 80 H178" marker-end="url(#ah)"/>
+              <path class="pl-line" d="M318 80 H358" marker-end="url(#ah)"/>
+              <path class="pl-line" d="M498 80 H538" marker-end="url(#ah)"/>
+              <path class="pl-line" d="M678 80 H718" marker-end="url(#ah)"/>
+              <!-- conversation path -->
+              <path class="pl-line" d="M790 112 V200 H678" marker-end="url(#ah)"/>
+              <path class="pl-line" d="M538 220 H498" marker-end="url(#ah)"/>
+              <path class="pl-line pl-dash" d="M428 252 V276 H64 V112" marker-end="url(#ah)"/>
+
+              <g class="pl-node" style="--d:0"><rect x="8" y="48" width="110" height="64" rx="8"/><text x="63" y="76" class="pl-t">Phone</text><text x="63" y="95" class="pl-s">guided capture</text></g>
+              <g class="pl-node" style="--d:1"><rect x="178" y="48" width="140" height="64" rx="8"/><text x="248" y="70" class="pl-c">C1</text><text x="248" y="88" class="pl-t">Segment and</text><text x="248" y="104" class="pl-t">read headline</text></g>
+              <g class="pl-node pl-key" style="--d:2"><rect x="358" y="48" width="140" height="64" rx="8"/><text x="428" y="70" class="pl-c">C2</text><text x="428" y="88" class="pl-t">Read and</text><text x="428" y="104" class="pl-t">correct body</text></g>
+              <g class="pl-node" style="--d:3"><rect x="538" y="48" width="140" height="64" rx="8"/><text x="608" y="76" class="pl-t">Assemble</text><text x="608" y="95" class="pl-s">article object</text></g>
+              <g class="pl-node" style="--d:4"><rect x="718" y="48" width="150" height="64" rx="8"/><text x="793" y="76" class="pl-t">Read aloud</text><text x="793" y="95" class="pl-s">headline, then body</text></g>
+              <g class="pl-node" style="--d:5"><rect x="538" y="188" width="140" height="64" rx="8"/><text x="608" y="210" class="pl-c">C4</text><text x="608" y="228" class="pl-t">Intent and</text><text x="608" y="244" class="pl-t">answer style</text></g>
+              <g class="pl-node" style="--d:6"><rect x="358" y="188" width="140" height="64" rx="8"/><text x="428" y="210" class="pl-c">C3</text><text x="428" y="228" class="pl-t">Grounded</text><text x="428" y="244" class="pl-t">Sinhala answer</text></g>
+              <text x="782" y="160" class="pl-s" style="text-anchor:end">spoken question</text>
+              <text x="250" y="268" class="pl-s">answer spoken on the phone</text>
+            </svg>
+            <figcaption>The reading path runs along the top; a spoken question follows the lower path. C1 to C4 mark the component that owns each stage.</figcaption>
+          </figure>
+
+          <div class="components">
+            <article class="comp">
+              <header><span class="comp-id">C1</span><h4>Topological Sinhala Character Recognition via Medial Axis Transform</h4></header>
+              <p class="comp-owner">M.J.J Muthunayaka</p>
+              <p>Isolates the article with PaddleOCR layout detection and CRAFT line detection, then reads the headline through two branches in parallel: a raw binarised branch and a Medial Axis Transform skeleton branch, each with its own custom Tesseract LSTM model trained on 90,000 SinOCR images.</p>
+              <p class="comp-result">The raw branch is the stronger general pipeline (mean CER 0.0586 against 0.0922 on 8,872 images); skeletonisation wins on 29 of 135 complex fonts.</p>
+            </article>
+            <article class="comp">
+              <header><span class="comp-id">C2</span><h4>Context-Aware Sinhala Post-OCR Error Correction Model</h4></header>
+              <p class="comp-owner">H.P.I Madhusanka</p>
+              <p>Guides capture to a target glyph height with an automatic shutter, recognises the body with Tesseract, and corrects each sentence with an mT5-small model trained on synthetic errors drawn from a measured taxonomy of 192 Sinhala character confusions.</p>
+              <p class="comp-result">Character errors fell by 36.7% and word errors by 51.2% on a locked test set; listeners' word recovery rose from 60.0% to 79.2%.</p>
+            </article>
+            <article class="comp">
+              <header><span class="comp-id">C3</span><h4>Advanced Document Retrieval and Information Generation</h4></header>
+              <p class="comp-owner">W.G.N. Devindi</p>
+              <p>Splits about 500 Sinhala newspaper articles into paragraphs, indexes them with dense and BM25 retrieval fused by reciprocal rank, and generates a Sinhala answer whose wording and depth follow the requested style.</p>
+              <p class="comp-result">On 72 test queries, 90.2% of answers were faithful to the evidence and 93.8% of unanswerable questions were correctly declined.</p>
+            </article>
+            <article class="comp">
+              <header><span class="comp-id">C4</span><h4>Adaptive Conversational Personalization and Voice Interaction</h4></header>
+              <p class="comp-owner">Sathsara S.P.Y.B</p>
+              <p>Translates the spoken Sinhala request with NLLB-200, detects the intent with a local Llama 3.2 1B model, and decides the answer style through a four-tier rule that ends in a per-user online model learning only from the user's own confirmed preferences.</p>
+              <p class="comp-result">Identified the intent of 35 of 45 unseen Sinhala commands (77.78%) at 1.53 s each, with no Sinhala intent dataset.</p>
+            </article>
+          </div>
+
+          <h4 class="list-title">The integrated system</h4>
+          <dl class="measures">
+            <div><dt>Automated integration tests</dt><dd>323 of 325 pass</dd></div>
+            <div><dt>Shutter to speech</dt><dd>about 27 s measured; about 12 s projected with batched correction</dd></div>
+            <div><dt>Question to answer</dt><dd>about 4 to 6 s</dd></div>
+            <div><dt>Demonstration</dt><dd>Full system shown working end to end at Progress Presentation 2</dd></div>
+          </dl>
+        </article>
+
+        <article id="technologies" class="sub">
+          <h3>Technologies used</h3>
+          <div class="tech">
+            <div>
+              <h4>Mobile client</h4>
+              <ul><li>Kotlin, CameraX, Retrofit</li><li>Android speech recognition (si-LK)</li><li>Android TextToSpeech, Google Sinhala voice</li></ul>
+            </div>
+            <div>
+              <h4>Reader service</h4>
+              <ul><li>Python, FastAPI, uvicorn</li><li>Pydantic schema contracts</li><li>pytest (325 cases)</li></ul>
+            </div>
+            <div>
+              <h4>Vision and OCR</h4>
+              <ul><li>Tesseract 5 with custom LSTM models</li><li>PaddleOCR, CRAFT, OpenCV</li><li>scikit-image (Zhang-Suen thinning)</li></ul>
+            </div>
+            <div>
+              <h4>Language models</h4>
+              <ul><li>mT5-small (Hugging Face Transformers, PyTorch)</li><li>NLLB-200, Llama 3.2 1B via llama-cpp-python</li><li>gpt-5.4-mini through the OpenAI API</li></ul>
+            </div>
+            <div>
+              <h4>Retrieval and learning</h4>
+              <ul><li>LangChain, ChromaDB, rank_bm25</li><li>multilingual-e5-small embeddings</li><li>River online learning, TinyDB</li></ul>
+            </div>
+            <div>
+              <h4>Development</h4>
+              <ul><li>Git with per-member branches</li><li>Google Colab (T4) for training</li><li>NVIDIA RTX 4060 workstation</li></ul>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== MILESTONES ============================== -->
+<!-- Edit dates, marks and descriptions inside each .ms-panel below. -->
+<section id="milestones" class="section section-alt">
+  <div class="wrap">
+    <header class="section-head">
+      <h2>Milestones</h2>
+      <p>The assessments of the project, with their dates and the marks allocated to each. Choose one to see its details.</p>
+    </header>
+
+    <div class="ms">
+      <div class="ms-pick">
+        <label for="ms-select">Assessment</label>
+        <div class="select-wrap">
+          <select id="ms-select">
+            <option value="ms-1">Project Proposal</option>
+            <option value="ms-2">Progress Presentation 1</option>
+            <option value="ms-3">Progress Presentation 2</option>
+            <option value="ms-4">Final Assessment</option>
+          </select>
+        </div>
+      </div>
+
+      <ol class="ms-track" aria-label="Milestone timeline">
+        <li><button type="button" data-target="ms-1"><span class="ms-dot"></span><span class="ms-name">Project Proposal</span><span class="ms-date">February 2026</span></button></li>
+        <li><button type="button" data-target="ms-2"><span class="ms-dot"></span><span class="ms-name">Progress Presentation 1</span><span class="ms-date">May 2026</span></button></li>
+        <li><button type="button" data-target="ms-3"><span class="ms-dot"></span><span class="ms-name">Progress Presentation 2</span><span class="ms-date">August 2026</span></button></li>
+        <li><button type="button" data-target="ms-4"><span class="ms-dot"></span><span class="ms-name">Final Assessment</span><span class="ms-date">November 2026</span></button></li>
+      </ol>
+
+      <div class="ms-panels">
+        <article class="ms-panel" id="ms-1">
+          <div class="ms-meta">
+            <div><span>Date</span><strong>February 2026</strong></div>
+            <div><span>Marks allocated</span><strong>12%</strong></div>
+            <div><span>Status</span><strong class="ok">Completed</strong></div>
+          </div>
+          <h3>Project Proposal</h3>
+          <p>Each member presented the research problem, literature, research gap, objectives and proposed methodology for their component, supported by an individual proposal report and the group's Topic Assessment Form.</p>
+          <ul><li>Individual proposal reports</li><li>Proposal presentation to the panel</li><li>Topic Assessment Form (project charter)</li></ul>
+        </article>
+        <article class="ms-panel" id="ms-2" hidden>
+          <div class="ms-meta">
+            <div><span>Date</span><strong>May 2026</strong></div>
+            <div><span>Marks allocated</span><strong>15%</strong></div>
+            <div><span>Status</span><strong class="ok">Completed</strong></div>
+          </div>
+          <h3>Progress Presentation 1</h3>
+          <p>About half of each component was demonstrated: datasets prepared, first models trained and baselines measured, with the system architecture and the shared article contract agreed across the group.</p>
+          <ul><li>Progress slides</li><li>Working prototype of each component</li><li>Panel feedback recorded for the next phase</li></ul>
+        </article>
+        <article class="ms-panel" id="ms-3" hidden>
+          <div class="ms-meta">
+            <div><span>Date</span><strong>August 2026</strong></div>
+            <div><span>Marks allocated</span><strong>18%</strong></div>
+            <div><span>Status</span><strong class="ok">Completed</strong></div>
+          </div>
+          <h3>Progress Presentation 2</h3>
+          <p>The integrated system was demonstrated live and worked end to end. Each member presented measured benchmarks for their component and answered viva questions on model choice, data, metrics and validity.</p>
+          <ul><li>Live end-to-end demonstration</li><li>Component benchmarks and test evidence</li><li>Viva with the panel</li></ul>
+        </article>
+        <article class="ms-panel" id="ms-4" hidden>
+          <div class="ms-meta">
+            <div><span>Date</span><strong>November 2026</strong></div>
+            <div><span>Marks allocated</span><strong>20%</strong></div>
+            <div><span>Status</span><strong class="pending">Upcoming</strong></div>
+          </div>
+          <h3>Final Assessment</h3>
+          <p>Submission of the common group report and the four individual theses, the project website, and the final presentation and viva covering the complete, evaluated system.</p>
+          <ul><li>Common integrated solution report</li><li>Four individual theses</li><li>Final presentation and viva</li></ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== DOCUMENTS ============================== -->
+<!-- To publish a document, replace the file in /docs keeping the same name, or change the href. -->
+<section id="documents" class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <h2>Documents</h2>
+      <p>Everything the group has submitted, and what is still to come.</p>
+    </header>
+
+    <div class="doc-groups">
+      <div class="doc-group">
+        <h3>Project charter</h3>
+        <ul class="files">
+          <li><span class="f-name">Topic Assessment Form</span><span class="f-who">Group</span><span class="f-tag">PDF</span><a class="f-link" href="docs/project-charter.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Topic Assessment Form</span></a></li>
+        </ul>
+      </div>
+
+      <div class="doc-group">
+        <h3>Proposal documents</h3>
+        <ul class="files">
+          <li><span class="f-name">Proposal report, Component 1</span><span class="f-who">IT22072238</span><span class="f-tag">PDF</span><a class="f-link" href="docs/proposal-IT22072238.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Proposal report, Component 1</span></a></li>
+          <li><span class="f-name">Proposal report, Component 2</span><span class="f-who">IT22259134</span><span class="f-tag">PDF</span><a class="f-link" href="docs/proposal-IT22259134.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Proposal report, Component 2</span></a></li>
+          <li><span class="f-name">Proposal report, Component 3</span><span class="f-who">IT22120670</span><span class="f-tag">PDF</span><a class="f-link" href="docs/proposal-IT22120670.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Proposal report, Component 3</span></a></li>
+          <li><span class="f-name">Proposal report, Component 4</span><span class="f-who">IT22004468</span><span class="f-tag">PDF</span><a class="f-link" href="docs/proposal-IT22004468.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Proposal report, Component 4</span></a></li>
+        </ul>
+      </div>
+
+      <div class="doc-group">
+        <h3>Checklist documents</h3>
+        <ul class="files">
+          <li><span class="f-name">Checklist 1</span><span class="f-who">Group</span><span class="f-tag">PDF</span><a class="f-link" href="docs/checklist-1.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Checklist 1</span></a></li>
+          <li><span class="f-name">Checklist 2</span><span class="f-who">Group</span><span class="f-tag">PDF</span><a class="f-link" href="docs/checklist-2.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Checklist 2</span></a></li>
+        </ul>
+      </div>
+
+      <div class="doc-group">
+        <h3>Final documents</h3>
+        <ul class="files">
+          <li><span class="f-name">Common integrated solution report</span><span class="f-who">Group</span><span class="f-tag">PDF</span><a class="f-link" href="docs/final-group-report.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Common integrated solution report</span></a></li>
+          <li><span class="f-name">Individual thesis, Component 1</span><span class="f-who">IT22072238</span><span class="f-tag">PDF</span><a class="f-link" href="docs/thesis-IT22072238.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Individual thesis, Component 1</span></a></li>
+          <li><span class="f-name">Individual thesis, Component 2</span><span class="f-who">IT22259134</span><span class="f-tag">PDF</span><a class="f-link" href="docs/thesis-IT22259134.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Individual thesis, Component 2</span></a></li>
+          <li><span class="f-name">Individual thesis, Component 3</span><span class="f-who">IT22120670</span><span class="f-tag">PDF</span><a class="f-link" href="docs/thesis-IT22120670.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Individual thesis, Component 3</span></a></li>
+          <li><span class="f-name">Individual thesis, Component 4</span><span class="f-who">IT22004468</span><span class="f-tag">PDF</span><a class="f-link" href="docs/thesis-IT22004468.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Individual thesis, Component 4</span></a></li>
+          <li class="is-pending"><span class="f-name">Research paper</span><span class="f-who">Group</span><span class="f-tag">PDF</span><span class="f-status">Pending</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PRESENTATIONS ============================== -->
+<section id="presentations" class="section section-alt">
+  <div class="wrap">
+    <header class="section-head">
+      <h2>Presentations</h2>
+      <p>Slides from each assessment, in the order they were presented.</p>
+    </header>
+
+    <ol class="decks">
+      <li class="deck">
+        <div class="deck-cover" aria-hidden="true"><span>Proposal</span></div>
+        <div class="deck-info"><h3>Proposal presentation</h3><p>Problem, gap, objectives and the proposed method for each component.</p></div>
+        <a class="f-link" href="docs/slides-proposal.pdf" target="_blank" rel="noopener">View slides<span class="sr-only">: proposal presentation</span></a>
+      </li>
+      <li class="deck">
+        <div class="deck-cover" aria-hidden="true"><span>PP1</span></div>
+        <div class="deck-info"><h3>Progress Presentation 1</h3><p>Datasets, first models, baselines and the agreed architecture.</p></div>
+        <a class="f-link" href="docs/slides-pp1.pdf" target="_blank" rel="noopener">View slides<span class="sr-only">: Progress Presentation 1</span></a>
+      </li>
+      <li class="deck">
+        <div class="deck-cover" aria-hidden="true"><span>PP2</span></div>
+        <div class="deck-info"><h3>Progress Presentation 2</h3><p>Integrated system, component benchmarks and the end-to-end demonstration.</p></div>
+        <a class="f-link" href="docs/slides-pp2.pdf" target="_blank" rel="noopener">View slides<span class="sr-only">: Progress Presentation 2</span></a>
+      </li>
+      <li class="deck is-pending">
+        <div class="deck-cover" aria-hidden="true"><span>Final</span></div>
+        <div class="deck-info"><h3>Final presentation</h3><p>The complete, evaluated system. Slides will be added after the final assessment.</p></div>
+        <span class="f-status">Pending</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================== ABOUT US ============================== -->
+<!-- Replace the LinkedIn and email placeholders for each person. -->
+<section id="about" class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <h2>About us</h2>
+      <p>Four final-year Data Science undergraduates at SLIIT, each responsible for one component, and our supervisors.</p>
+    </header>
+
+    <h3 class="group-title">Supervision</h3>
+    <ul class="people people-sup">
+      <li class="person">
+        <div class="avatar avatar-initials" aria-hidden="true">LA</div>
+        <div class="p-body">
+          <h4>Ms. Lakmini Abeywardhana</h4>
+          <p class="p-role">Supervisor</p>
+          <p class="p-org">Department of Computer Science, SLIIT</p>
+          <p class="p-links"><a href="mailto:supervisor@sliit.lk">supervisor@sliit.lk</a></p>
+        </div>
+      </li>
+      <li class="person">
+        <div class="avatar avatar-initials" aria-hidden="true">AD</div>
+        <div class="p-body">
+          <h4>Ms. Adya Dissanayaka</h4>
+          <p class="p-role">Co-supervisor</p>
+          <p class="p-org">Department of Computer Science, SLIIT</p>
+          <p class="p-links"><a href="mailto:cosupervisor@sliit.lk">cosupervisor@sliit.lk</a></p>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="group-title">Research team</h3>
+    <ul class="people people-team">
+      <li class="person">
+        <img class="avatar" src="assets/img/team/muthunayaka.jpg" alt="Portrait of M.J.J Muthunayaka" width="180" height="180" loading="lazy">
+        <div class="p-body">
+          <h4>Muthunayaka M.J.J</h4>
+          <p class="p-id">IT22072238</p>
+          <p class="p-role">Topological Sinhala character recognition via Medial Axis Transform</p>
+          <p class="p-links">
+            <a href="mailto:it22072238@my.sliit.lk">it22072238@my.sliit.lk</a>
+            <a class="li" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Muthunayaka M.J.J on LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V16M8 7.8v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.3-2.6s2.2.9 2.2 2.6V16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>LinkedIn</a>
+          </p>
+        </div>
+      </li>
+      <li class="person">
+        <img class="avatar" src="assets/img/team/madhusanka.jpg" alt="Portrait of H.P.I Madhusanka" width="180" height="180" loading="lazy" onerror="this.outerHTML='<div class=&quot;avatar avatar-initials&quot; aria-hidden=&quot;true&quot;>HM</div>'">
+        <div class="p-body">
+          <h4>Madhusanka H.P.I</h4>
+          <p class="p-id">IT22259134</p>
+          <p class="p-role">Context-aware Sinhala post-OCR error correction</p>
+          <p class="p-links">
+            <a href="mailto:it22259134@my.sliit.lk">it22259134@my.sliit.lk</a>
+            <a class="li" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Madhusanka H.P.I on LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V16M8 7.8v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.3-2.6s2.2.9 2.2 2.6V16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>LinkedIn</a>
+          </p>
+        </div>
+      </li>
+      <li class="person">
+        <img class="avatar" src="assets/img/team/devindi.jpg" alt="Portrait of W.G.N Devindi" width="180" height="180" loading="lazy">
+        <div class="p-body">
+          <h4>Devindi W.G.N</h4>
+          <p class="p-id">IT22120670</p>
+          <p class="p-role">Advanced document retrieval and information generation</p>
+          <p class="p-links">
+            <a href="mailto:it22120670@my.sliit.lk">it22120670@my.sliit.lk</a>
+            <a class="li" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Devindi W.G.N on LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V16M8 7.8v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.3-2.6s2.2.9 2.2 2.6V16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>LinkedIn</a>
+          </p>
+        </div>
+      </li>
+      <li class="person">
+        <img class="avatar" src="assets/img/team/sathsara.jpg" alt="Portrait of S.P.Y.B Sathsara" width="180" height="180" loading="lazy">
+        <div class="p-body">
+          <h4>Sathsara S.P.Y.B</h4>
+          <p class="p-id">IT22004468</p>
+          <p class="p-role">Adaptive conversational personalisation and voice interaction</p>
+          <p class="p-links">
+            <a href="mailto:it22004468@my.sliit.lk">it22004468@my.sliit.lk</a>
+            <a class="li" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Sathsara S.P.Y.B on LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V16M8 7.8v.1M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.3-2.6s2.2.9 2.2 2.6V16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>LinkedIn</a>
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<!-- Replace the placeholder email address and phone number. -->
+<section id="contact" class="section section-alt">
+  <div class="wrap contact-grid">
+    <div>
+      <header class="section-head">
+        <h2>Contact us</h2>
+        <p>Questions about the research, the data or a possible collaboration are welcome. We usually reply within two working days.</p>
+      </header>
+      <dl class="contact-list">
+        <div><dt>Email</dt><dd><a href="mailto:r26ds002.research@gmail.com">r26ds002.research@gmail.com</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+94770000000">+94 77 000 0000</a></dd></div>
+        <div><dt>Address</dt><dd>Department of Computer Science<br>Sri Lanka Institute of Information Technology<br>New Kandy Road, Malabe, Sri Lanka</dd></div>
+      </dl>
+    </div>
+
+    <form class="contact-form" id="contact-form" novalidate>
+      <h3>Write to us</h3>
+      <p class="form-note">This opens your email app with the message filled in.</p>
+      <div class="field"><label for="cf-name">Full name</label><input id="cf-name" name="name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="cf-email">Email address</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="cf-subject">Subject</label><input id="cf-subject" name="subject" type="text" required></div>
+      <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" rows="5" required></textarea></div>
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+      <button class="btn btn-primary" type="submit">Open email to send</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <div class="footer-brand">
+      <img src="assets/img/mark.svg" alt="" width="28" height="28">
+      <div>
+        <p class="f-title">Interactive Sinhala Text Reader for the Visually Impaired</p>
+        <p class="f-sub">Group R26-DS-002, Department of Computer Science, Sri Lanka Institute of Information Technology</p>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p>© 2026 R26-DS-002 research team</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </div>
+</footer>
+
+<p class="toast" id="toast" role="status" aria-live="polite"></p>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
