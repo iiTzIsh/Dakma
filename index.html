@@ -6,13 +6,13 @@
 <title>Interactive Sinhala Text Reader | R26-DS-002</title>
 <meta name="description" content="Research project R26-DS-002, SLIIT: an interactive Sinhala text reader for visually impaired people using OCR, NLP and AI.">
 <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=2.0">
 <script>
   /* apply saved theme before first paint */
   (function () {
     try {
       var t = localStorage.getItem('rdr-theme');
-      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (t !== 'dark') t = 'light';
       document.documentElement.setAttribute('data-theme', t);
     } catch (e) {}
   })();
@@ -601,6 +601,6 @@
 </footer>
 
 <p class="toast" id="toast" role="status" aria-live="polite"></p>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2.0"></script>
 </body>
 </html>
