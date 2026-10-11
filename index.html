@@ -6,7 +6,7 @@
 <title>Interactive Sinhala Text Reader | R26-DS-002</title>
 <meta name="description" content="Research project R26-DS-002, SLIIT: an interactive Sinhala text reader for visually impaired people using OCR, NLP and AI.">
 <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/style.css?v=2.0">
+<link rel="stylesheet" href="assets/css/style.css?v=2.2">
 <script>
   /* apply saved theme before first paint */
   (function () {
@@ -394,6 +394,28 @@
       <p>Everything the group has submitted, and what is still to come.</p>
     </header>
 
+    <!-- Research paper highlight. Edit status, title, authors, venue, date and links below. -->
+    <article class="paper" aria-labelledby="paper-title">
+      <a class="paper-thumb" href="docs/research-paper.pdf" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+        <img src="assets/img/covers/research-paper.jpg" alt="" width="150" height="212" loading="lazy">
+      </a>
+      <div class="paper-body">
+        <p class="paper-status"><span class="paper-dot"></span>Accepted for presentation</p>
+        <h3 id="paper-title">Topological Character Recognition and Semantic Post-Processing for Sinhala Document Accessibility</h3>
+        <p class="paper-authors">Janindu Muthunayaka, Ishara Madhusanka, Bumal Sathsara, Nadee Devindi, Lakmini Abeywardhana, Adya Dissanayaka</p>
+        <p class="paper-summary">Tests Medial Axis Transform skeletonisation against a standard pipeline for Sinhala headline recognition, and shows that a fine-tuned mT5-small corrector cuts character errors by 36.7% and word errors by 51.2% on real photographed newsprint.</p>
+        <dl class="paper-meta">
+          <div><dt>Venue</dt><dd>International Conference Name 2026</dd></div>
+          <div><dt>Date</dt><dd>December 2026</dd></div>
+          <div><dt>Location</dt><dd>Colombo, Sri Lanka</dd></div>
+        </dl>
+        <div class="paper-actions">
+          <a class="btn btn-primary btn-small" href="docs/research-paper.pdf" target="_blank" rel="noopener">Read the paper</a>
+          <a class="btn btn-quiet btn-small" href="https://example.com/" target="_blank" rel="noopener">Conference website</a>
+        </div>
+      </div>
+    </article>
+
     <div class="doc-groups">
       <div class="doc-group">
         <h3>Project charter</h3>
@@ -428,7 +450,6 @@
           <li><span class="f-name">Individual thesis, Component 2</span><span class="f-who">IT22259134</span><span class="f-tag">PDF</span><a class="f-link" href="docs/thesis-IT22259134.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Individual thesis, Component 2</span></a></li>
           <li><span class="f-name">Individual thesis, Component 3</span><span class="f-who">IT22120670</span><span class="f-tag">PDF</span><a class="f-link" href="docs/thesis-IT22120670.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Individual thesis, Component 3</span></a></li>
           <li><span class="f-name">Individual thesis, Component 4</span><span class="f-who">IT22004468</span><span class="f-tag">PDF</span><a class="f-link" href="docs/thesis-IT22004468.pdf" target="_blank" rel="noopener">View<span class="sr-only">: Individual thesis, Component 4</span></a></li>
-          <li class="is-pending"><span class="f-name">Research paper</span><span class="f-who">Group</span><span class="f-tag">PDF</span><span class="f-status">Pending</span></li>
         </ul>
       </div>
     </div>
@@ -445,22 +466,22 @@
 
     <ol class="decks">
       <li class="deck">
-        <div class="deck-cover" aria-hidden="true"><span>Proposal</span></div>
+        <a class="deck-cover has-img" href="docs/slides-proposal.pdf" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/img/covers/slides-proposal.jpg" alt="" width="640" height="359" loading="lazy"><span class="deck-tag">Proposal</span><span class="deck-count">39 slides</span></a>
         <div class="deck-info"><h3>Proposal presentation</h3><p>Problem, gap, objectives and the proposed method for each component.</p></div>
         <a class="f-link" href="docs/slides-proposal.pdf" target="_blank" rel="noopener">View slides<span class="sr-only">: proposal presentation</span></a>
       </li>
       <li class="deck">
-        <div class="deck-cover" aria-hidden="true"><span>PP1</span></div>
+        <a class="deck-cover has-img" href="docs/slides-pp1.pdf" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/img/covers/slides-pp1.jpg" alt="" width="640" height="359" loading="lazy"><span class="deck-tag">PP1</span><span class="deck-count">19 slides</span></a>
         <div class="deck-info"><h3>Progress Presentation 1</h3><p>Datasets, first models, baselines and the agreed architecture.</p></div>
         <a class="f-link" href="docs/slides-pp1.pdf" target="_blank" rel="noopener">View slides<span class="sr-only">: Progress Presentation 1</span></a>
       </li>
       <li class="deck">
-        <div class="deck-cover" aria-hidden="true"><span>PP2</span></div>
+        <a class="deck-cover has-img" href="docs/slides-pp2.pdf" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/img/covers/slides-pp2.jpg" alt="" width="640" height="359" loading="lazy"><span class="deck-tag">PP2</span><span class="deck-count">18 slides</span></a>
         <div class="deck-info"><h3>Progress Presentation 2</h3><p>Integrated system, component benchmarks and the end-to-end demonstration.</p></div>
         <a class="f-link" href="docs/slides-pp2.pdf" target="_blank" rel="noopener">View slides<span class="sr-only">: Progress Presentation 2</span></a>
       </li>
       <li class="deck is-pending">
-        <div class="deck-cover" aria-hidden="true"><span>Final</span></div>
+        <div class="deck-cover" aria-hidden="true"><span>Final</span><small>Slides coming soon</small></div>
         <div class="deck-info"><h3>Final presentation</h3><p>The complete, evaluated system. Slides will be added after the final assessment.</p></div>
         <span class="f-status">Pending</span>
       </li>
@@ -601,6 +622,6 @@
 </footer>
 
 <p class="toast" id="toast" role="status" aria-live="polite"></p>
-<script src="assets/js/main.js?v=2.0"></script>
+<script src="assets/js/main.js?v=2.2"></script>
 </body>
 </html>

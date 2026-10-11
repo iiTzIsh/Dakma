@@ -1,0 +1,52 @@
+Title Paper,Author,Citations,"Jounral 
+/ Conference 
+Ranking",Date,Type,Reviews,,,Objective
+Situational Analysis of the Rights of Persons with Disabilities in Sri Lanka,UNPRPD (UN Partnership on the Rights of Persons with Disabilities),NA,NA,Jan-25,Institutional,Comprehensive situational analysis of the status of disability rights in Sri Lanka,,,General
+Survey on Publicly Available Sinhala Natural Language Processing Tools and Research,Nisansa de Silva ,30,NA,Jun-19,Survey,"Surveys the landscape of publicly available NLP tools and research for the Sinhala language, covering tokenisation, stemming, part-of-speech tagging, named entity recognition, word embeddings, and corpora. ",,,1
+A Medial Axis Based Thinning Strategy for Character Images,M. Suresh et al.,20,NCVPRIPG 2010,Jan-10,Methodology,"Using of Medial axis transform on Bengali script, a script in the same Indo-Aryan language as sinhala",,,1
+Thinning methodologies-a comprehensive survey,"L. Lam, S.-W. Lee, and C. Y. Suen",22,Q1/3/197,Sep-92,Review,Provided one of the earliest full documentation of various thinning methods all at once.,,,1
+"Deep Learning Based Sinhala Optical Character 
+Recognition (OCR)",S. Jayasundara et al.,8,NA,Nov-20,Review,First insight to postprocessing after a OCR engin and the physical application of it,,,1
+"Mobile Base Sinhala Book Reader for Visually Impaired 
+Students",T. Madhusha et al.,NA,NA,Nov-23,Methodology,How a much simpler veriosn of our system was built earlier and its drawback and advantages.,,,1
+SSR-GNNs: Stroke-based Sketch Representation with Graph Neural Networks,"S. Cheng, Y. Ren, and Y. Yang",15,CVPRW 2022,Jun-22,Workshop ,Proposes stroke level graph representaion for sketches where stroke inforamtion is encoded.,,,1
+An Overview of the Tesseract OCR Engine,R. Smith,1572,ICDAR -CORE : A ,Sep-07,Conference,Detail of the open-source Tesseract OCR engine,,,1
+Vivoice — Reading Assistant for the Blind using OCR and TTS,R. Prabha et al.,5,ICCCI,Jan-22,Conference,"Proposes Vivoice, a wearable reading assistant for visually impaired users that recognises text in surroundings and identifies nearby objects",,,1
+SinBERT - A Pre-trained Language Model for the Sinhala Language,NLPC-UOM (University of Moratuwa),85,arXiv / ACL Anthology,2022,Research,"RoBERTa-based, pretrained on 15M Sinhala texts, strong contextual understanding, bidirectional attention suited for token classification",,,2
+mT5 - A Massively Multilingual Pre-Trained Text-to-Text Transformer,Xue et al.,"3,500",NAACL 2021 (A*),2021,Research,"Covers 101 languages including Sinhala, subword tokenizer handles Unicode scripts, mT5-small confirmed feasible for seq2seq correction",,,2
+SinSpell - Sinhala Spell Checker (HunSpell-based),SinSpell Team,N/A,Web service / tool,2021,Tool,"Targets phonetically similar character confusion (typos), not visually similar OCR errors, different error distribution from OCR",,,2
+RoundTripOCR - Noise-Clean Pair Generation for Low-Resource Scripts,Kashid et al.,40,LREC 2022,2022,Research,"Render clean text as image ? OCR back ? align for pairs, adapted for Sinhala in this research, addresses data scarcity for low-resource scripts",,,2
+BERT-based Post-OCR Correction for Vietnamese Text,Nguyen et al.,95,NAACL 2021 (A*),2021,Research,"Confirms that BERT-based detection + seq2seq correction is effective for non-Latin OCR correction, validates the two-stage architecture choice",,,2
+NMT as a Black Box for OCR Post-Correction,Stahlberg & Byrne,110,arXiv 2019,2019,Research,"Treats correction as machine translation, shows that sequence models can fix OCR errors without explicit rules, motivates mT5 seq2seq framing",,,2
+Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer,Raffel et al.,"15,000",JMLR (Q1),2020,Research,"Seq2seq framing of NLP tasks, task prefix input format (correct:) adopted from T5 paradigm",,,2
+Post-processing of Sinhala OCR Output Using Unicode Normalization and Substitution Rules,Weerasinghe et al.,12,IEEE ICIAfS,2016,Research,"First Sinhala post-OCR work, shows rule-based systems cannot generalise to unseen patterns, word-level only, no sentence context",,,2
+Morphological Dictionary-Based Post-OCR Correction for Sinhala,Premasiri et al.,18,ICAC 2018,2018,Research,"Achieves 59.8% to 92.6% word accuracy on controlled corpus, fails on newspaper layouts and unseen patterns, still word-level",,,2
+A Low-Resource Speech-Driven NLP Pipeline for Sinhala Dyslexia Assistance,"Peshala Perera, Deshan Sumanathilaka",1,RANLP 2025 (Recent Advances in Natural Language Processing),2025,Conference,"Introduces the first real-time NLP pipeline for Sinhala-speaking adults with dyslexia, integrating Whisper (STT), 
+SinBERT (error classification), mT5 + Mistral (correction), and gTTS (TTS). Achieves 66% STT accuracy and 70% correction accuracy
+ on a synthetically generated 3000-sample Sinhala dataset.",,,2
+SiTSE: Sinhala Text Simplification Dataset and Evaluation,"Surangika Ranathunga, Rumesh Sirithunga,
+ Himashi Rathnayake, Lahiru De Silva, 
+Thamindu Aluthwala, Saman Peramuna, Ravi Shekhar",3,arXiv:2412.01293,2024,Research,"Presents SiTSE, the first human-curated sentence-level text simplification dataset for Sinhala, Models the task as a zero-resource seq2seq problem using 
+mT5 and mBART, and shows that Intermediate Task Transfer Learning (ITTL) with translation as an auxiliary task outperforms all baselines.
+Also introduces two new human evaluation error categories: ""near exact copy"" and ""missing major fact"".",,,2
+VisRAG: Vision-based Retrieval-Augmented Generation on Multi-Modality Documents,"Shi Yu, Chaoyue Tang, Bokai Xu, Junbo Cui, Junhao Ran, 
+Yukun Yan, Zhenghao Liu, Shuo Wang, Xu Han, Zhiyuan Liu, 
+Maosong Sun",193,ICLR 2025 ,2025,Conference,"Proposes VisRAG, a vision-language model (VLM)-based RAG pipeline that directly embeds document pages as images instead of parsing text, 
+preserving full visual and layout information. ",,,General
+SinLlama: A Large Language Model for Sinhala,"H.W.K. Aravinda, Rashad Sirajudeen, Samith Karunathilake, 
+Nisansa de Silva, Rishemjit Kaur, Arshdeep Singh Bhankhar, 
+Surangika Ranathunga",3,arXiv:2508.09115,2025,Research,"Presents SinLlama, the first decoder-based open-source LLM explicitly pre-trained for Sinhala, 
+built by extending Llama-3-8B with Sinhala-specific vocabulary",,,2
+ReadCtrl: Personalizing Text Generation with Readability-Controlled Instruction Learning,"Hieu Tran, Zonghai Yao, Lingxi Li, Hong Yu",17,arXiv:2406.09205,2024,Research,"Proposes ReadCtrl, a readability-controlled instruction tuning framework for LLMs that enables fine-grained, 
+near-continuous complexity control over generated text.",,,General
+Survey on Publicly Available Sinhala Natural Language Processing Tools and Research,Nisansa de Silva,92,NA,6/1/2019,Survey,"Surveys the landscape of publicly available NLP tools and research for the Sinhala language, 
+covering tokenisation, stemming, part-of-speech tagging, named entity recognition, word embeddings,
+ and corpora.",,,1
+ANU at MLSP-2024: Prompt-based Lexical Simplification for English and Sinhala,Sandaru Seneviratne and Hanna Suominen,5,BEA Workshop @ ACL 2024,20-Jun-24,Conference,"Explores prompt-based methods (zero-shot, one-shot, few-shot) using GPT-3.5-turbo for lexical complexity 
+prediction and lexical substitution in both English and Sinhala; demonstrates comparable performance for 
+English but limited results for Sinhala.",,,1
+"Effect of Age, Gender and Vowel Type on Vowel Space Area in Sinhala Speakers","S.V. Narasimhan, W.G.S.S. Karunarathne",NA,Vidyodaya Journal of Science,2021,Research,"Documents acoustic properties of Sinhala vowels across age and gender groups, providing foundational phonetic data relevant to building and evaluating a Sinhala STT pipeline and TTS output quality for visually impaired users.",,,4
+Survey on Publicly Available Sinhala Natural Language Processing Tools and Research,Nisansa de Silva,30,arXiv / Living Research Article,19-Jun,Survey,"Confirms that Sinhala is a low-resource language with critical gaps in STT, intent classification, and NLU datasets, directly justifying the NLLB translation bridge approach and the use of English datasets (CLINC150) for intent detection.",,,4
+Intent Recognition Framework for Low Resource Spoken Dialogue Systems,Gupta et al.,NA,arXiv:2104.08755,2021,Research,"Proposes an intent recognition framework specifically for low-resource spoken dialogue systems, validating the architectural approach of combining STT output with a lightweight classifier for intent extraction.",,,4
+User Modeling in Human–Computer Interaction,G. Fischer,NA,User Modeling and User-Adapted Interaction (Q1),2001,Research,"Establishes theoretical foundations for user modeling and adaptive personalization in HCI systems, directly supporting the behavioral profiling and dynamic user profile update mechanism in Component 4's personalization engine.",,,4
+Language Models are Few-Shot Learners,T.B. Brown et al.,NA,NeurIPS 2020 (A*),2020,Research,"Demonstrates that large pre-trained language models can perform zero-shot and few-shot intent classification, providing the academic basis for using the NLLB + LLM pipeline as a baseline comparison against the fine-tuned XLM-RoBERTa approach in Component 4's evaluation.",,,4
